@@ -1,0 +1,74 @@
+File: D:\localloop\localloop-frontend\src\pages\Home.jsx
+  Line 132:22 - Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  130 |         // but for a view-only timestamp, this is usually acceptable if not called directly in JSX/render as a value that changes identity.
+  131 |         // Here it's called inside the render loop which is why it's flagged.
+> 132 |         const diff = Date.now() - ts;
+      |                      ^^^^^^^^^^ Cannot call impure function
+  133 |         const minutes = Math.floor(diff / 60000);
+  134 |         if (minutes < 60) return `${minutes}m ago`;
+  135 |         const hours = Math.floor(minutes / 60); (react-hooks/purity)
+File: D:\localloop\localloop-frontend\src\pages\Marketplace.jsx
+  Line 16:9 - Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  14 |         // Load products and shops from localStorage
+  15 |         const allProducts = JSON.parse(localStorage.getItem("allProducts") || "[]");
+> 16 |         setProducts(allProducts);
+     |         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  17 |     }, [viewMode]); // Reload when view changes (e.g. after selling)
+  18 |
+  19 |     const user = JSON.parse(localStorage.getItem("user") || "{}"); (react-hooks/set-state-in-effect)
+File: D:\localloop\localloop-frontend\src\pages\Mentorship.jsx
+  Line 113:13 - Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  111 |         // Show success message if profile was just created
+  112 |         if (location.state?.profileCreated) {
+> 113 |             setShowSuccessMessage(true);
+      |             ^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  114 |             // Auto-hide after 10 seconds
+  115 |             const timer = setTimeout(() => {
+  116 |                 setShowSuccessMessage(false); (react-hooks/set-state-in-effect)
+File: D:\localloop\localloop-frontend\src\pages\Profile.jsx
+  Line 647:43 - Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  645 |
+  646 |                             const newShop = {
+> 647 |                               id: `shop-${Date.now()}`,
+      |                                           ^^^^^^^^^^ Cannot call impure function
+  648 |                               ...businessForm,
+  649 |                               userId: user.id || "user-1",
+  650 |                               createdAt: new Date().toISOString() (react-hooks/purity)
+File: D:\localloop\localloop-frontend\src\pages\SellerDashboard.jsx
+  Line 36:17 - Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  34 |             const userShops = allShops.filter(s => s.userId === (user.id || "user-1"));
+  35 |             if (userShops.length > 0) {
+> 36 |                 setShop(userShops[0]);
+     |                 ^^^^^^^ Avoid calling setState() directly within an effect
+  37 |                 // Update products for this fallback shop
+  38 |                 loadProducts(userShops[0].id);
+  39 |             } else { (react-hooks/set-state-in-effect)
+
+Total Errors: 5

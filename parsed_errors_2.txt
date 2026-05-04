@@ -1,0 +1,16 @@
+File: D:\localloop\localloop-frontend\src\pages\Home.jsx
+  Line 125:36 - Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  123 |     }, []);
+  124 |
+> 125 |     const [now, setNow] = useState(Date.now());
+      |                                    ^^^^^^^^^^ Cannot call impure function
+  126 |
+  127 |     useEffect(() => {
+  128 |         const timer = setInterval(() => setNow(Date.now()), 60000); // Update every minute (react-hooks/purity)
+File: D:\localloop\localloop-frontend\src\pages\Marketplace.jsx
+  Line 11:22 - 'setProducts' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u. (no-unused-vars)
+
+Total Errors: 2

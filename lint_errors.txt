@@ -1,0 +1,141 @@
+﻿
+D:\localloop\localloop-frontend\src\components\layout\Sidebar.jsx
+  6:11  error  'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\localloop\localloop-frontend\src\components\ui\Modal.jsx
+  7:5  error  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+
+D:\localloop\localloop-frontend\src\pages\Home.jsx
+  127:22  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  125 |     // Helper to format time
+  126 |     const formatTime = (ts) => {
+> 127 |         const diff = Date.now() - ts;
+      |                      ^^^^^^^^^^ Cannot call impure function
+  128 |         const minutes = Math.floor(diff / 60000);
+  129 |         if (minutes < 60) return `${minutes}m ago`;
+  130 |         const hours = Math.floor(minutes / 60);  react-hooks/purity
+  135:11  error  'renderFeedItem' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                no-unused-vars
+
+D:\localloop\localloop-frontend\src\pages\Marketplace.jsx
+  16:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  14 |         // Load products and shops from localStorage
+  15 |         const allProducts = JSON.parse(localStorage.getItem("allProducts") || "[]");
+> 16 |         setProducts(allProducts);
+     |         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  17 |     }, [viewMode]); // Reload when view changes (e.g. after selling)
+  18 |
+  19 |     const user = JSON.parse(localStorage.getItem("user") || "{}");  react-hooks/set-state-in-effect
+  20:11  error  'allShops' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-unused-vars
+
+D:\localloop\localloop-frontend\src\pages\MentorProfile.jsx
+   9:12  error  'isEditing' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             no-unused-vars
+   9:23  error  'setIsEditing' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          no-unused-vars
+  15:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  13 |         const savedProfile = JSON.parse(localStorage.getItem("mentorProfile") || "null");
+  14 |         if (savedProfile) {
+> 15 |             setMentorProfile(savedProfile);
+     |             ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  16 |         } else {
+  17 |             // If no profile exists, redirect to create one
+  18 |             navigate("/profile", { state: { tab: "services", mode: "mentor" } });  react-hooks/set-state-in-effect
+
+D:\localloop\localloop-frontend\src\pages\Mentorship.jsx
+   83:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  81 |     // Load mentors on mount and when location changes
+  82 |     useEffect(() => {
+> 83 |         loadMentors();
+     |         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  84 |
+  85 |         // Show success message if profile was just created
+  86 |         if (location.state?.profileCreated) {  react-hooks/set-state-in-effect
+  100:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   98 |     useEffect(() => {
+   99 |         if (!searchTerm.trim()) {
+> 100 |             setFilteredMentors(mentors);
+      |             ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  101 |             return;
+  102 |         }
+  103 |                                                               react-hooks/set-state-in-effect
+
+D:\localloop\localloop-frontend\src\pages\Profile.jsx
+   16:90  error  'edit' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       no-unused-vars
+   95:17  error  'name' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       no-unused-vars
+   95:23  error  'location' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   no-unused-vars
+   95:33  error  'createdAt' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+   95:44  error  'updatedAt' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+  643:43  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  641 |
+  642 |                             const newShop = {
+> 643 |                               id: `shop-${Date.now()}`,
+      |                                           ^^^^^^^^^^ Cannot call impure function
+  644 |                               ...businessForm,
+  645 |                               userId: user.id || "user-1",
+  646 |                               createdAt: new Date().toISOString()  react-hooks/purity
+
+D:\localloop\localloop-frontend\src\pages\SellerDashboard.jsx
+  31:17  error  Error: Cannot access variable before it is declared
+
+`loadProducts` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  29 |                 setShop(userShops[0]);
+  30 |                 // Update products for this fallback shop
+> 31 |                 loadProducts(userShops[0].id);
+     |                 ^^^^^^^^^^^^ `loadProducts` accessed before it is declared
+  32 |             } else {
+  33 |                 navigate("/profile", { state: { tab: "services", mode: "business" } });
+  34 |             }
+
+  40 |     }, [shopId, navigate, user.id]);
+  41 |
+> 42 |     const loadProducts = (currentShopId) => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 43 |         const allProducts = JSON.parse(localStorage.getItem("allProducts") || "[]");
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 44 |         // Filter products for this SPECIFIC shop
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 45 |         const shopProducts = allProducts.filter(p => p.shopId === currentShopId);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 46 |         setProducts(shopProducts);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 47 |     }
+     | ^^^^^^ `loadProducts` is declared here
+  48 |
+  49 |     const handleSaveProduct = (productData) => {
+  50 |         if (!shop) return;  react-hooks/immutability
+
+Γ£û 18 problems (18 errors, 0 warnings)
+
